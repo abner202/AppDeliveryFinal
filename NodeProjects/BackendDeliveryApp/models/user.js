@@ -2,7 +2,7 @@ const db = require('../config/confing');
 
 const User = {};
 
-User.create = (user, result) => {
+User.create = (users, result) => {
 
     const sql = `
         INSERT INTO
