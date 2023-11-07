@@ -1,11 +1,14 @@
-const usersController=require("../controllers/usersController");
+const usersController = require('../controllers/usersController');
 
-module.exports=(app)=>{
+module.exports = (app,upload) => {
 
-    //GET ARA OBTENER DATOS 
-    //POST ALMACENAS DATOS 
-    //PUT PARA ACTUALIZAR 
-    //DELETE BORRAR DATO
+    // GET -> OBTENER DATOS
+    // POST -> ALMACENAR DATOS
+    // PUT -> ACTUALIZAR DATOS
+    // DELETE -> ELIMINAR DATOS
 
-    app.post("/api/users/create", usersController.register);
+    app.post('/api/users/create', usersController.register);
+    app.post('/api/users/createWithImage',upload.array('image', 1), usersController.registerWithImage);
+    app.post('/api/users/login', usersController.login);
+
 }
