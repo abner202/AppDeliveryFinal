@@ -4,6 +4,8 @@ const http = require('http');
 const server = http.createServer(app);
 const logger = require('morgan');
 const cors = require('cors');
+const passport = require('passport');
+const multer = require('multer');
 
 /*
 * IMPORTAR RUTAS
@@ -20,18 +22,26 @@ app.use(express.urlencoded({
 
 
 app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./config/passport')(passport);
 
 app.disable('x-powered-by');
 
 app.set('port', port);
 
+const upload = multer({
+    storage: multer.memoryStorage()
+});
+
 /*
 * LLAMADO DE LAS RUTAS
 */
-usersRoutes(app);
+usersRoutes(app, upload);
 
 
-server.listen(3000, '192.168.1.8' || 'localhost', function() {
+server.listen(3000, '192.168.43.13' || 'localhost', function() {
     console.log('Aplicacion de NodeJS ' + port + ' Iniciada...')
 });
 
